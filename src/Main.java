@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
       Main window = new Main();
+      window.run();
     }
 
     class Canvas extends JPanel {
@@ -17,7 +18,7 @@ public class Main extends JFrame {
 
       @Override
       public void paint(Graphics g) {
-        grid.paint(g);
+        grid.paint(g, getMousePosition());
       }
     }
 
@@ -27,5 +28,11 @@ public class Main extends JFrame {
       this.setContentPane(canvas);
       this.pack();
       this.setVisible(true);
+    }
+
+    public void run() {
+      while(true) {
+        repaint();
+      }
     }
 }

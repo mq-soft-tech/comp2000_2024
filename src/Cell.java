@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class Cell {
   // fields
@@ -14,10 +15,22 @@ public class Cell {
   }
 
   // methods
-  public void paint(Graphics g) {
-    g.setColor(Color.WHITE);
+  public void paint(Graphics g, Point mousePos) {
+    if(contains(mousePos)) {
+      g.setColor(Color.GRAY);
+    } else {
+      g.setColor(Color.WHITE);
+    }
     g.fillRect(x, y, size, size);
     g.setColor(Color.BLACK);
     g.drawRect(x, y, size, size);
+  }
+
+  public boolean contains(Point p) {
+    if(p != null) {
+      return x < p.x && x+size > p.x && y < p.y && y+size > p.y;
+    } else {
+      return false;
+    }
   }
 }
