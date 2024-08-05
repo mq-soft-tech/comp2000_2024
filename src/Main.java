@@ -11,14 +11,14 @@ public class Main extends JFrame {
     }
 
     class Canvas extends JPanel {
-      Grid grid = new Grid();
+      Grid grid = new Grid(); // we want the canvas to access the grid
       public Canvas() {
         setPreferredSize(new Dimension(720, 720));
       }
 
       @Override
       public void paint(Graphics g) {
-        grid.paint(g, getMousePosition());
+        grid.paint(g, getMousePosition()); //Grid is an object + No 1 of T5: Get mousePos by adding method to paint. (return type is Point)
       }
     }
 
