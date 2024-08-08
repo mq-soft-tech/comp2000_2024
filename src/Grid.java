@@ -21,4 +21,16 @@ public class Grid {
       }
     }
   }
+
+ public class Actor{
+  protected Cell cell;
+  public Actor(Cell cell){
+    this.cell =cell;
+  }
+ }
+
+ 
+ 
+ 
+
 }
