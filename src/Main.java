@@ -11,14 +11,14 @@ public class Main extends JFrame {
     }
 
     class Canvas extends JPanel {
-      Grid grid = new Grid();
+      Stage stage = new Stage();
       public Canvas() {
         setPreferredSize(new Dimension(720, 720));
       }
 
       @Override
       public void paint(Graphics g) {
-        grid.paint(g, getMousePosition());
+        stage.paint(g, getMousePosition());
       }
     }
 
