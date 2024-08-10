@@ -75,3 +75,66 @@ Is there a place that you could put all the common parts?
 # Task 9
 
 Draw a picture of the inheritance hierarchy you have created.  You should (loosely) use [UML notation](http://umich.edu/~eecs381/handouts/UMLNotationSummary.pdf) for your diagram.  You are using UML In this case, and all through this course, only for "a rough sketch of an idea".
+
+# Task 10
+
+Did you notice the repetition in the stage paint method?  All three actors have the `paint` method called on them.  In fact, we might later want to have dozens of actors on the stage at any one time, we don't want dozens of calls to `someone.paint(g);`.  What we need is a collection to store all the actors, something like an array that we can put them all in.  Then we can just loop over that array and call  `paint` on every element.  _I think_ we should use an `ArrayList` (https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html).  Notice it is a generic collection?  You will need to use generics to make this work.  Put all the actors in a single array list called `actors` and then loop over this list to paint them.  Once you have done that you might like to add more actors to the stage.
+
+🤔 In my solution, I will declare the actors list as a `List` instead of an `ArrayList`.  Any idea why?  Why does this even work?
+
+# Task 11
+
+Turns out you are not able to use colours to distinguish the different types of actors!  You are going to need to draw little shapes to represent them.  You have been told you can't use images, you have to draw with Java2D primitives so the game can scale up and down as required.  The `Graphics` objects we are painting on know how to draw `Polygon`s (https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Polygon.html) so that is what we are going to use.  However, one polygon is not enough for each actor, we need each to be made of a list of polygons.  We will use `ArrayList` again!  Have the `Color` field of `Actor` changed to a list of polygons and initialise each subclass to an appropriate set of polygons.  You might find the following polygons a useful starting point where `location` is the top-left point of the actor (but I am sure you can do better as well - share your designs on the forums!):
+
+## Cat
+
+~~~~~
+    Polygon ear1 = new Polygon();
+    ear1.addPoint(loc.x + 11, loc.y + 5);
+    ear1.addPoint(loc.x + 15, loc.y + 15);
+    ear1.addPoint(loc.x + 7, loc.y + 15);
+    Polygon ear2 = new Polygon();
+    ear2.addPoint(loc.x + 22, loc.y + 5);
+    ear2.addPoint(loc.x + 26, loc.y + 15);
+    ear2.addPoint(loc.x + 18, loc.y + 15);
+    Polygon face = new Polygon();
+    face.addPoint(loc.x + 5, loc.y + 15);
+    face.addPoint(loc.x + 29, loc.y + 15);
+    face.addPoint(loc.x + 17, loc.y + 30);
+~~~~~
+
+## Dog
+
+~~~~~
+    Polygon ear1 = new Polygon();
+    ear1.addPoint(loc.x + 5, loc.y + 5);
+    ear1.addPoint(loc.x + 15, loc.y + 5);
+    ear1.addPoint(loc.x + 5, loc.y + 15);
+    Polygon ear2 = new Polygon();
+    ear2.addPoint(loc.x + 20, loc.y + 5);
+    ear2.addPoint(loc.x + 30, loc.y + 5);
+    ear2.addPoint(loc.x + 30, loc.y + 15);
+    Polygon face = new Polygon();
+    face.addPoint(loc.x + 8, loc.y + 7);
+    face.addPoint(loc.x + 27, loc.y + 7);
+    face.addPoint(loc.x + 27, loc.y + 25);
+    face.addPoint(loc.x + 8, loc.y + 25);
+~~~~~
+
+## Bird
+
+~~~~~
+    Polygon wing1 = new Polygon();
+    wing1.addPoint(loc.x + 5, loc.y + 5);
+    wing1.addPoint(loc.x + 15, loc.y + 17);
+    wing1.addPoint(loc.x + 5, loc.y + 17);
+    Polygon wing2 = new Polygon();
+    wing2.addPoint(loc.x + 30, loc.y + 5);
+    wing2.addPoint(loc.x + 20, loc.y + 17);
+    wing2.addPoint(loc.x + 30, loc.y + 17);
+    Polygon body = new Polygon();
+    body.addPoint(loc.x + 15, loc.y + 10);
+    body.addPoint(loc.x + 20, loc.y + 10);
+    body.addPoint(loc.x + 20, loc.y + 25);
+    body.addPoint(loc.x + 15, loc.y + 25);
+~~~~~
