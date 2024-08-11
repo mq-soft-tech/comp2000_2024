@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 
 public class Mouse extends JFrame {
-
     int x;
     int y;
     int size = 35;
