@@ -7,11 +7,13 @@ public class Cell {
   int x;
   int y;
   static int size = 35;
+  Mouse mouse;
 
   // constructors
   public Cell(int inX, int inY) {
     x = inX;
     y = inY;
+    mouse = new Mouse();
   }
 
   // methods
@@ -24,6 +26,8 @@ public class Cell {
     g.fillRect(x, y, size, size);
     g.setColor(Color.BLACK);
     g.drawRect(x, y, size, size);
+    mouse.paint(g, mousePos);
+    
   }
 
   public boolean contains(Point p) {
