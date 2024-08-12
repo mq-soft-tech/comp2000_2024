@@ -1,32 +1,41 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.util.LinkedList;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 
 
 public class Mouse extends JFrame {
     int x;
     int y;
-    int size = 35;
+    int size = 10;
     Point curMousePos = getMousePosition();
+    LinkedList<Point> prevMousePos;
 
     public Mouse(){
-
+        prevMousePos = new LinkedList<>();
     }
     
     public void paint(Graphics g, Point mousePos) {
-      System.out.println("test");
-        if(mousePos != null && mousePos != curMousePos){
-            g.setColor(Color.BLACK);
-            g.fillOval(mousePos.x, mousePos.y, size, size);
-            g.setColor(Color.BLACK);
-            g.drawOval(mousePos.x,mousePos.y,size,size);
-            curMousePos = mousePos;
+      if(mousePos != null){
+        prevMousePos.addFirst(new Point(mousePos.x, mousePos.y));
+        if(mousePos != prevMousePos.getFirst()){
+            System.out.println(prevMousePos.getFirst());
+            if (prevMousePos.size() > 100){
+                prevMousePos.removeLast();
+            }
+            for(int i = 0; i<prevMousePos.size();i++){
+                Point pos = prevMousePos.get(i);
+                g.setColor(Color.BLACK);
+                g.fillOval(pos.x, pos.y, size, size);
+                g.setColor(Color.BLACK);
+                g.drawOval(pos.x,pos.y,size,size);
+            } 
         }
-        System.out.println(getMousePosition());
+
+    }
     }
 
 }
+ //&& mousePos != curMousePos
