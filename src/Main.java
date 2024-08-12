@@ -12,6 +12,7 @@ public class Main extends JFrame {
 
     class Canvas extends JPanel {
       Stage stage = new Stage();
+      Trace trace = new Trace();
       public Canvas() {
         setPreferredSize(new Dimension(720, 720));
       }
