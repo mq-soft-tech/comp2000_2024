@@ -13,10 +13,28 @@ And answer the following questions about them:
 
   * These repositories are at two different websites - github and bitbucket - what are these sites?  What service do they provide? Which is better?
   * Who made the last commit to repository A?
+
+
+  > Matthew Roberts 
+
   * Who made the first commit to repository A?
   * Who made the first and last commits to repository B?
+  * Are either/both of these projects active at the moment? 🤔 If not, what do you think happened
+  
+
+  > Matthew Roberts <matthew.roberts@mq.edu.au>
+  * Who made the first commit to repository A?
+
+  > Jon Mountjoy <jon@heroku.com>
+
+  * Who made the first and last commits to repository B?
+  > DavePearce <dave01001110@gmail.com>
+
   * Are either/both of these projects active at the moment? 🤔 If not, what do you think happened?
-  * 🤔 Which file in each project has had the most activity?
+  > A: most recent commit is Thu Aug 18 04:45:08 2022 +0000
+  > B: most recent commit is Thu Aug 11 10:10:28 2022 +1200
+  > So in the case of both projects, no, these projects are not currently active. The people writing these project have probably moved on to do something else.
+
 
 # Task 2
 
