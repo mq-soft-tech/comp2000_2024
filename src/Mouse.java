@@ -16,7 +16,7 @@ public class Mouse extends JFrame {
     }
     
     public void paint(Graphics g, Point mousePos) {
-      if(mousePos != null ){
+      if(mousePos != null && !mousePos.equals(curMousePos)){
         curMousePos = mousePos;
         prevMousePos.addFirst(new Point(mousePos.x, mousePos.y));
         //System.out.println(mousePos);
@@ -36,4 +36,4 @@ public class Mouse extends JFrame {
     
 
 }
-//&& !mousePos.equals(curMousePos) 
+//
