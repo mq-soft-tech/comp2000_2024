@@ -24,7 +24,6 @@ public class Main extends JFrame {
       public void paint(Graphics g) {
           Point mousePos = getMousePosition();
           trail.add_position(mousePos);
-          
           grid.paint(g, mousePos);
           trail.paint(g); 
       }
