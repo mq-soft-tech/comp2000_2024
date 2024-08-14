@@ -14,25 +14,18 @@ public class Main extends JFrame {
     class Canvas extends JPanel {
       Grid grid = new Grid();
       mousetrail trail = new mousetrail();
-      Point lastposition = null;
+      
   
       public Canvas() {
           setPreferredSize(new Dimension(720, 720));
       }
   
       @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Point currentposition = getMousePosition();
-          if (currentposition != null) {
-            if (lastposition == null || lastposition.equals(currentposition)) {
-                trail.add_position(currentposition);
-                   lastposition = currentposition;
-     }
-    }
-
+      public void paint(Graphics g) {
+          Point mousePos = getMousePosition();
+          trail.add_position(mousePos);
           
-          grid.paint(g, currentposition);
+          grid.paint(g, mousePos);
           trail.paint(g); 
       }
   }
