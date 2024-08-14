@@ -36,4 +36,4 @@ public class Mouse extends JFrame {
     
 
 }
-//&& !mousePos.equals(curMousePos)
+//&& !mousePos.equals(curMousePos) 
