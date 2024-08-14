@@ -26,10 +26,9 @@ public class Mouse extends JFrame {
         }
 
         }
-        g.setColor(new Color(0,0,0,30));
         for(int i = 0; i<prevMousePos.size();i++){
             Point pos = prevMousePos.get(i);
-
+            g.setColor(Color.BLACK);
             g.fillOval(pos.x, pos.y, size, size);
         } 
 
