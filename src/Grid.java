@@ -8,6 +8,7 @@ public class Grid {
     Cell[][] cells = new Cell[20][20];
     ArrayList<Point> mouseTrail = new ArrayList<>();
     int maxTrailSize = 100;
+    Point lastMousePos = null;
 
     public Grid() {
         for (int i = 0; i < cells.length; i++) {
@@ -26,12 +27,16 @@ public class Grid {
         }
 
         if (mousePos != null && isMouseInsideGrid(mousePos)) {
+            if (lastMousePos == null || !mousePos.equals(lastMousePos)) {
+                mouseTrail.add(mousePos);
 
-            mouseTrail.add(mousePos);
-
-            if (mouseTrail.size() > maxTrailSize) {
-                mouseTrail.remove(0);
+                if (mouseTrail.size() > maxTrailSize) {
+                    mouseTrail.remove(0);
+                }
+                lastMousePos = mousePos;
             }
+        } else {
+            lastMousePos = null;
         }
 
         g.setColor(new Color(169, 169, 169, 70));
