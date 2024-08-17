@@ -10,9 +10,6 @@ public class Stage {
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
-    actors.add(new Cat(grid.cellAtColRow(0, 0)));
-    actors.add(new Dog(grid.cellAtColRow(0, 15)));
-    actors.add(new Bird(grid.cellAtColRow(12, 9)));
   }
 
   public void paint(Graphics g, Point mouseLoc) {
