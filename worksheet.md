@@ -138,3 +138,56 @@ Turns out you are not able to use colours to distinguish the different types of 
     body.addPoint(loc.x + 20, loc.y + 25);
     body.addPoint(loc.x + 15, loc.y + 25);
 ~~~~~
+
+# Task 12
+
+In this task we will add a method to the grid class that returns whatever cell is under a particular location.
+
+Such a method needs to take in a `Point` and return back a `Cell`.  It will do a simple calculation to turn the x and y coordinates into the right array indices and look them up.
+
+However, there are some areas on our stage where there are no cells, not to mention what to do when a `null` point is passed in!
+
+So, we need a method that _might_ return a `Cell`.  What should it do when it can't find a cell?  Return `null`?  Definitely not!!!!  You are just asking for a asking for null-pointer exception if you do that.  Instead, we will use the `Optional` generic container (https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html).  
+
+Add the following method to `Grid` that will return whatever cell is located around the point that is passed in.
+
+~~~~~
+public Optional<Cell> cellAtPoint(Point p)
+~~~~~
+
+🤔 How about we improve the `cellAtColRow` method now we know about optional containers?
+
+🤔 Now that we have `cellAtPoint`, lets use it.  Grow the app window to 1024x720 so we have some clear space to the right of the grid.  In this space, put the details of whatever cell we are hoving over.  For example, you might put the type of cell that is located there, and what it's elevation is.  There are many ways to do this, but one good way is to call `cellAtPoint` while painting the stage and use the resulting cell information.
+
+# Task 13
+
+Our task now is to add the ability to read in configuration data from a file.  Someone else at the company (person A) has tried and has committed some broken code.
+
+A file is kept in a "data" folder called "stage1.rvb". That file has one line for each configuration item.  We begin with just the character locations.
+
+This all seems OK, but they are getting an error on the build.  Track down the error and fix it for them.
+
+# Task 14
+
+At the moment, the file reading code will thrown an exception if it fails to read a file.  You should change this code so that _it handles a thrown an `IOException`_.  This means you will have to think hard about what to do on a failed file read.
+
+# Task 15
+
+Add the following method to the `Grid` class
+
+~~~~~
+    /**
+     * Takes a cell consumer (i.e. a function that has a single `Cell` argument and
+     * returns `void`) and applies that consumer to each cell in the grid.
+     * @param func The `Cell` to `void` function to apply at each spot.
+     */
+    public void doToEachCell(Consumer<Cell> func) {
+      // Your job to add the body
+    }
+~~~~~
+
+ Notice that the method accepts a `Consumer` functional interface.
+
+ Now use this method to turn the `paint` method of the `Grid` class into a single line of code.  I.e. remove the double-nested loop and replace it with a call to `doToEachCell`.
+
+🤔 Can you find anywhere else this is useful?  🤔🤔 Can you make any other useful _higher order_ methods?
