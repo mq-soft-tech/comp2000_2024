@@ -20,8 +20,7 @@ public class StageReader {
         if(cellMatcher.matches()) {
           char col = cellMatcher.group(1).charAt(0);
           int row = Integer.parseInt(cellMatcher.group(2));
-          // stage.grid.cellAtColRow(col, row).ifPresent(cellsInQuestion::add);
-          cellsInQuestion.add(stage.grid.cellAtColRow(col, row));
+          stage.grid.cellAtColRow(col, row).ifPresent(cellsInQuestion::add);
         } else {
           System.out.println("no match " + key);
         }
@@ -36,9 +35,9 @@ public class StageReader {
         }
       }
     } catch(IOException e) {
-      stage.actors.add(new Cat(stage.grid.cellAtColRow(0, 0)));
-      stage.actors.add(new Dog(stage.grid.cellAtColRow(0, 15)));
-      stage.actors.add(new Bird(stage.grid.cellAtColRow(12, 9)));
+      stage.actors.add(new Cat(stage.grid.cellAtColRow(0, 0).get()));
+      stage.actors.add(new Dog(stage.grid.cellAtColRow(0, 15).get()));
+      stage.actors.add(new Bird(stage.grid.cellAtColRow(12, 9).get()));
     }
     return stage;
   }
