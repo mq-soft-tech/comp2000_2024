@@ -7,32 +7,38 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StageReader {
-  public static Stage readStage(String path) throws IOException {
+  public static Stage readStage(String path) {
     Stage stage = new Stage();
     Properties props = (new Properties());
-    props.load(new FileInputStream(path));
-    for(String key: props.stringPropertyNames()) {
-      String value = props.getProperty(key);
-      Pattern cell = Pattern.compile("(.)(\\d+)");
-      List<Cell> cellsInQuestion = new ArrayList<Cell>();
-      Matcher cellMatcher = cell.matcher(key);
-      if(cellMatcher.matches()) {
-        char col = cellMatcher.group(1).charAt(0);
-        int row = Integer.parseInt(cellMatcher.group(2));
-        // stage.grid.cellAtColRow(col, row).ifPresent(cellsInQuestion::add);
-        cellsInQuestion.add(stage.grid.cellAtColRow(col, row));
-      } else {
-        System.out.println("no match " + key);
-      }
-      for(Cell c: cellsInQuestion) {
-        if(value.equals("cat")) {
-          stage.actors.add(new Cat(c));
-        } else if(value.equals("dog")) {
-          stage.actors.add(new Dog(c));
-        } else if(value.equals("bird")) {
-          stage.actors.add(new Bird(c));
+    try {
+      props.load(new FileInputStream(path));
+      for(String key: props.stringPropertyNames()) {
+        String value = props.getProperty(key);
+        Pattern cell = Pattern.compile("(.)(\\d+)");
+        List<Cell> cellsInQuestion = new ArrayList<Cell>();
+        Matcher cellMatcher = cell.matcher(key);
+        if(cellMatcher.matches()) {
+          char col = cellMatcher.group(1).charAt(0);
+          int row = Integer.parseInt(cellMatcher.group(2));
+          // stage.grid.cellAtColRow(col, row).ifPresent(cellsInQuestion::add);
+          cellsInQuestion.add(stage.grid.cellAtColRow(col, row));
+        } else {
+          System.out.println("no match " + key);
+        }
+        for(Cell c: cellsInQuestion) {
+          if(value.equals("cat")) {
+            stage.actors.add(new Cat(c));
+          } else if(value.equals("dog")) {
+            stage.actors.add(new Dog(c));
+          } else if(value.equals("bird")) {
+            stage.actors.add(new Bird(c));
+          }
         }
       }
+    } catch(IOException e) {
+      stage.actors.add(new Cat(stage.grid.cellAtColRow(0, 0)));
+      stage.actors.add(new Dog(stage.grid.cellAtColRow(0, 15)));
+      stage.actors.add(new Bird(stage.grid.cellAtColRow(12, 9)));
     }
     return stage;
   }

@@ -1,6 +1,5 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,14 +14,7 @@ public class Main extends JFrame {
       Stage stage;
       public Canvas() {
         setPreferredSize(new Dimension(720, 720));
-        try {
-          stage = StageReader.readStage("data/stage11.rvb");
-        } catch (IOException e) {
-          stage = new Stage();
-          stage.actors.add(new Cat(stage.grid.cellAtColRow(0, 0)));
-          stage.actors.add(new Dog(stage.grid.cellAtColRow(0, 15)));
-          stage.actors.add(new Bird(stage.grid.cellAtColRow(12, 9)));
-        }
+        stage = StageReader.readStage("data/stage11.rvb");
       }
 
       @Override
