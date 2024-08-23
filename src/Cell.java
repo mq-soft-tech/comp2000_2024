@@ -25,6 +25,7 @@ public class Cell extends Rectangle {
     g.drawRect(x, y, size, size);
   }
 
+  @Override
   public boolean contains(Point p) {
     if(p != null) {
       return super.contains(p);
