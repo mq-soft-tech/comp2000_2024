@@ -15,7 +15,14 @@ public class Main extends JFrame {
       Stage stage;
       public Canvas() {
         setPreferredSize(new Dimension(720, 720));
-        stage = StageReader.readStage("data/stage11.rvb");
+        try {
+          stage = StageReader.readStage("data/stage11.rvb");
+        } catch (IOException e) {
+          stage = new Stage();
+          stage.actors.add(new Cat(stage.grid.cellAtColRow(0, 0)));
+          stage.actors.add(new Dog(stage.grid.cellAtColRow(0, 15)));
+          stage.actors.add(new Bird(stage.grid.cellAtColRow(12, 9)));
+        }
       }
 
       @Override
