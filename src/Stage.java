@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class Stage {
   Grid grid;
@@ -29,8 +28,8 @@ public class Stage {
       for(Actor a: actors) {
         if(!a.isHuman()) {
           List<Cell> possibleLocs = getClearRadius(a.loc, a.moves);
-          int moveBotChooses = (new Random()).nextInt(possibleLocs.size());
-          a.setLocation(possibleLocs.get(moveBotChooses));
+          Cell nextLoc = a.strat.chooseNextLoc(possibleLocs);
+          a.setLocation(nextLoc);
         }
       }
       currentState = State.ChoosingActor;
@@ -75,6 +74,8 @@ public class Stage {
       g.drawString(Character.toString(a.loc.col) + Integer.toString(a.loc.row), valueIndent, yLoc+vTab);
       g.drawString("artificiality:", labelIndent, yLoc+2*vTab);
       g.drawString(a.isHuman() ? "Human" : "Bot", valueIndent, yLoc+2*vTab);
+      g.drawString("strategy:", labelIndent, yLoc+3*vTab);
+      g.drawString(a.strat.toString(), valueIndent, yLoc+3*vTab);
     }    
   }
 
