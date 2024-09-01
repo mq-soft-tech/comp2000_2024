@@ -221,3 +221,15 @@ Notice that the computer move is random every time.  The bot AI (such as it is) 
 # Task 18
 
 We are going to build some (very rudimentary) strategy into this turn-based strategy game.  At the moment, all the actors on the bot team will just move randomly.  Instead, we want their strategy to be determined by _which row they are on_.  If they are on an even-numbered then they should move randomly, but if they are on an odd-numbered row they should _always move to the left-most possible location_.  Note:  if it is not clear yet, you need the strategy pattern so implement this.  Why is is the right pattern for this task?
+
+# Task 17a
+
+Re-do Task 17 from last week. Can you identify which design pattern was used? Find the diagram for the design pattern in the text book and use it to draw a matching diagram using the classes in our code base.
+
+# Task 19
+
+Head office have demanded that all iteration be done with the ["enhanced for loop" - aka the "for each" loop](https://web.archive.org/web/20180113011535/blogs.oracle.com/corejavatechtips/using-enhanced-for-loops-with-your-classes).  You don't mind, this is a sensible-enough plan.
+
+You go on a hunt for loops that might need changing.  First you find the nested for-loops in the `Grid` constructor but head-office allow old-style loops for building arrays.  However, there are _two_ other places in `Grid.java` where forbidden-looping techqniques are used.  The team has a discussion and decides the best solution is to add an iterator to `Grid` so that the enhanced for loop can be used.
+
+Your job is to create such an iterator.  It must iterate over every cell in the grid, but the order it does so does not matter.  Then you should use that iterator to replace all the forbidden loops in `Grid`.
