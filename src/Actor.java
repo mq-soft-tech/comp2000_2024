@@ -20,7 +20,6 @@ public abstract class Actor {
     turns = 1;
     setPoly();
   }
-
   public void paint(Graphics g) {
     for(Polygon p: display) {
       g.setColor(color);
