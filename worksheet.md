@@ -233,3 +233,17 @@ Head office have demanded that all iteration be done with the ["enhanced for loo
 You go on a hunt for loops that might need changing.  First you find the nested for-loops in the `Grid` constructor but head-office allow old-style loops for building arrays.  However, there are _two_ other places in `Grid.java` where forbidden-looping techqniques are used.  The team has a discussion and decides the best solution is to add an iterator to `Grid` so that the enhanced for loop can be used.
 
 Your job is to create such an iterator.  It must iterate over every cell in the grid, but the order it does so does not matter.  Then you should use that iterator to replace all the forbidden loops in `Grid`.
+
+# Task 17b
+
+Did you find a matching pattern in Task17a? Design Patterns can either be quite strictly followed, or can be implemented quite loosely when compared to a textbook descripton. We can think of the `enum` inside of `Stage.java` as loosely implementing either the Strategy pattern or the State pattern (the difference between then is one of _intent_). However, we've not properly implemented the State pattern as the work is still done inside `Stage`
+
+Can you fix the inadequacies and more strictly implement the State pattern?
+
+Hint: The `Stage` class makes use of the `State` enum in two different contexts (`paint` and `mouseClicked`), so your solution will have to implement *two* different `handle()` methods, one for each context. We've already added a separate `GameState.java` interface to get you started.
+
+# 🤔 Task 18a
+
+This task will sit to the side of our other tasks for the moment. It is an experiment. Even after we get an answer, we may not build upon that answer in later tasks. However, I think this is the most interesting task so far, it is certainly worth your time.
+
+Can we make the strategy pattern we created in Task18 disappear with lambda expressions? More concretely, can I get rid of the strategy interface and its subclasses and still have dynamic behaviour at run-time? If so, implement it and discuss the pros and cons of this approach compared to a "real" strategy pattern.
