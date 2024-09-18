@@ -2,7 +2,7 @@ package userinterface;
 
 import java.awt.BorderLayout;
 import java.util.List;
-
+import java.util.Optional;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,7 +18,7 @@ public class CartPage extends Page {
     public static final String ROUTE_NAME = "cart-page";
 
     private Cart cart;
-    private Runnable purchaseFn;
+    private Optional<Runnable> purchaseFn = Optional.empty();  // Changed to Optional
 
     public CartPage(UIService uiservice, Account account, Cart cart) {
         super(uiservice, account, ROUTE_NAME);
@@ -26,7 +26,7 @@ public class CartPage extends Page {
     }
 
     public void setPurchaseFn(Runnable fn) {
-        purchaseFn = fn;
+        this.purchaseFn = Optional.ofNullable(fn);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CartPage extends Page {
         JButton purchaseButton = new JButton();
         purchaseButton.setText("Purchase");
         purchaseButton.addActionListener(e -> {
-            purchaseFn.run();
+            purchaseFn.ifPresent(Runnable::run);
             service.refresh();
         });
         panel.add(purchaseButton);
