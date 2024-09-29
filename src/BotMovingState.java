@@ -12,7 +12,7 @@ public class BotMovingState extends StateCommon {
     // do we have AI moves to make?
     for(Actor a: stage.actors) {
       if(!a.isHuman()) {
-        List<Cell> possibleLocs = stage.getClearRadius(a.loc, a.moves);
+        List<Cell> possibleLocs = getClearRadius(a.loc, a.moves);
         Cell nextLoc = a.strat.chooseNextLoc(possibleLocs);
         a.setLocation(nextLoc);
       }
@@ -21,6 +21,14 @@ public class BotMovingState extends StateCommon {
     for(Actor a: stage.actors) {
       a.turns = 1;
     }
+  }
+
+  public List<Cell> getClearRadius(Cell from, int size) {
+    List<Cell> init = stage.grid.getRadius(from, size);
+    for(Actor a: stage.actors) {
+      init.remove(a.loc);
+    }
+    return init;
   }
 
   public void mouseClicked(int x, int y) {

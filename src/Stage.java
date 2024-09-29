@@ -65,14 +65,6 @@ public class Stage {
     }    
   }
 
-  public List<Cell> getClearRadius(Cell from, int size) {
-    List<Cell> init = grid.getRadius(from, size);
-    for(Actor a: actors) {
-      init.remove(a.loc);
-    }
-    return init;
-  }
-
   public void mouseClicked(int x, int y) {
     currentState.mouseClicked(x, y);
   }
