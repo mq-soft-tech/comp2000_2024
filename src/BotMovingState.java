@@ -1,6 +1,10 @@
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BotMovingState extends StateCommon {
   public BotMovingState(Stage s) {
@@ -24,6 +28,17 @@ public class BotMovingState extends StateCommon {
   }
 
   public List<Cell> getClearRadius(Cell from, int size) {
+    // task 20
+    // create a Set of Actor locations that can be filtered out
+    final Set<Cell> actorLocs = new HashSet<Cell>(
+      stage.actors.stream().map(a -> a.loc).collect(Collectors.toSet())
+    );
+    // un-comment the following lines and complete them
+    //Stream<Cell> init = stage.grid.getRadius(from, size)
+    //Stream<Cell> clear = 
+    //return clear.collect(Collectors.toList());
+
+    // remove the lines below
     List<Cell> init = stage.grid.getRadius(from, size);
     for(Actor a: stage.actors) {
       init.remove(a.loc);
