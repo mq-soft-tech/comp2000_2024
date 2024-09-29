@@ -18,11 +18,11 @@ public class Stage {
     actors = new ArrayList<Actor>();
     cellOverlay = new ArrayList<Cell>();
     actorInAction = Optional.empty();
-    currentState = new ChoosingActorState();
+    currentState = new ChoosingActorState(this);
   }
 
   public void paint(Graphics g, Point mouseLoc) {
-    currentState.paint(g, mouseLoc, this);
+    currentState.paint(g, mouseLoc);
     grid.paint(g, mouseLoc);
     grid.paintOverlay(g, cellOverlay, new Color(0f, 0f, 1f, 0.5f));
     for(Actor a: actors) {
@@ -74,6 +74,6 @@ public class Stage {
   }
 
   public void mouseClicked(int x, int y) {
-    currentState.mouseClicked(x, y, this);
+    currentState.mouseClicked(x, y);
   }
 }

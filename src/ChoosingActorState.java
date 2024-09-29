@@ -2,22 +2,23 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Optional;
 
-public class ChoosingActorState implements GameState {
-  public void paint(Graphics g, Point mouseLoc, Stage s) {
+public class ChoosingActorState extends StateCommon {
+  public ChoosingActorState(Stage s) {
+    super(s);
+    stateName = "ChoosingActor";
   }
 
-  public void mouseClicked(int x, int y, Stage s) {
-    s.actorInAction = Optional.empty();
-    for(Actor a: s.actors) {
+  public void paint(Graphics g, Point mouseLoc) {
+  }
+
+  public void mouseClicked(int x, int y) {
+    stage.actorInAction = Optional.empty();
+    for(Actor a: stage.actors) {
       if(a.loc.contains(x, y) && a.isHuman()) {
-        s.cellOverlay = s.grid.getRadius(a.loc, a.moves);
-        s.actorInAction = Optional.of(a);
-        s.currentState = new SelectingNewLocationState();
+        stage.cellOverlay = stage.grid.getRadius(a.loc, a.moves);
+        stage.actorInAction = Optional.of(a);
+        stage.currentState = new SelectingNewLocationState(stage);
       }
     }
-  }
-
-  public String toString() {
-    return "ChoosingActor";
   }
 }

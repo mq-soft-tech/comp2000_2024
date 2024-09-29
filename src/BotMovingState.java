@@ -2,28 +2,29 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 
-public class BotMovingState  implements GameState {
-  public void paint(Graphics g, Point mouseLoc, Stage s) {
+public class BotMovingState extends StateCommon {
+  public BotMovingState(Stage s) {
+    super(s);
+    stateName = "BotMoving";
+  }
+
+  public void paint(Graphics g, Point mouseLocs) {
     // do we have AI moves to make?
-    for(Actor a: s.actors) {
+    for(Actor a: stage.actors) {
       if(!a.isHuman()) {
-        List<Cell> possibleLocs = s.getClearRadius(a.loc, a.moves);
+        List<Cell> possibleLocs = stage.getClearRadius(a.loc, a.moves);
         Cell nextLoc = a.strat.chooseNextLoc(possibleLocs);
         a.setLocation(nextLoc);
       }
     }
-    s.currentState = new ChoosingActorState();
-    for(Actor a: s.actors) {
+    stage.currentState = new ChoosingActorState(stage);
+    for(Actor a: stage.actors) {
       a.turns = 1;
     }
   }
 
-  public void mouseClicked(int x, int y, Stage s) {
+  public void mouseClicked(int x, int y) {
     // should never happen
-    System.out.println(s.currentState);
-  }
-
-  public String toString() {
-    return "BotMoving";
+    System.out.println(stage.currentState);
   }
 }

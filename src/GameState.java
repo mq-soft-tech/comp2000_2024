@@ -1,8 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Point;
 
-// Naive solution to Task 17b - extra parameter "Stage s" added to both methods
+// Alternative solution to Task 17b - extra parameter "Stage s" removed from both methods
 public interface GameState {
-  public void paint(Graphics g, Point mouseLoc, Stage s);
-  public void mouseClicked(int x, int y, Stage s);
+  public void paint(Graphics g, Point mouseLoc);
+  public void mouseClicked(int x, int y);
 }
