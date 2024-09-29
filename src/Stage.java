@@ -11,32 +11,18 @@ public class Stage {
   List<Cell> cellOverlay;
   Optional<Actor> actorInAction;
 
-  enum State {ChoosingActor, SelectingNewLocation, BotMoving}
-  State currentState;
+  GameState currentState;
 
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
     cellOverlay = new ArrayList<Cell>();
     actorInAction = Optional.empty();
-    currentState = State.ChoosingActor;
+    currentState = new ChoosingActorState();
   }
 
   public void paint(Graphics g, Point mouseLoc) {
-    // do we have AI moves to make?
-    if(currentState == State.BotMoving) {
-      for(Actor a: actors) {
-        if(!a.isHuman()) {
-          List<Cell> possibleLocs = getClearRadius(a.loc, a.moves);
-          Cell nextLoc = a.strat.chooseNextLoc(possibleLocs);
-          a.setLocation(nextLoc);
-        }
-      }
-      currentState = State.ChoosingActor;
-      for(Actor a: actors) {
-        a.turns = 1;
-      }
-    }
+    currentState.paint(g, mouseLoc, this);
     grid.paint(g, mouseLoc);
     grid.paintOverlay(g, cellOverlay, new Color(0f, 0f, 1f, 0.5f));
     for(Actor a: actors) {
@@ -88,44 +74,6 @@ public class Stage {
   }
 
   public void mouseClicked(int x, int y) {
-    switch(currentState) {
-      case ChoosingActor:
-        actorInAction = Optional.empty();
-        for(Actor a: actors) {
-          if(a.loc.contains(x, y) && a.isHuman()) {
-            cellOverlay = grid.getRadius(a.loc, a.moves);
-            actorInAction = Optional.of(a);
-            currentState = State.SelectingNewLocation;
-          }
-        }
-        break;
-      case SelectingNewLocation:
-        Optional<Cell> clicked = Optional.empty();
-        for(Cell c: cellOverlay) {
-          if(c.contains(x, y)) {
-            clicked = Optional.of(c);
-          }
-        }
-        cellOverlay = new ArrayList<Cell>();
-        if(clicked.isPresent() && actorInAction.isPresent()) {
-          actorInAction.get().setLocation(clicked.get());
-          actorInAction.get().turns--;
-          int humansWithMovesLeft = 0;
-          for(Actor a: actors) {
-            if(a.isHuman() && a.turns > 0) {
-              humansWithMovesLeft++;
-            }
-          }
-          if(humansWithMovesLeft > 0) {
-            currentState = State.ChoosingActor;
-          } else {
-            currentState = State.BotMoving;
-          }
-        }
-        break;
-      default:
-        System.out.println(currentState);
-        break;
-    }
+    currentState.mouseClicked(x, y, this);
   }
 }
