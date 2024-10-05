@@ -29,10 +29,10 @@ public class BotMovingState extends StateCommon {
 
   public List<Cell> getClearRadius(Cell from, int size) {
     // task 20a
-    return stage.grid.getRadius(from, size).stream().filter(
-      c -> !stage.actors.stream()
+    return stage.grid.getRadius(from, size).stream()
+      .filter(c -> stage.actors.stream()
         .map(a -> a.loc)
-        .anyMatch(aLoc -> aLoc.equals(c)))
+        .noneMatch(aLoc -> aLoc.equals(c)))
       .collect(Collectors.toList());
   }
 
