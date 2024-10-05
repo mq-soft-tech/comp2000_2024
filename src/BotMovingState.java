@@ -34,16 +34,9 @@ public class BotMovingState extends StateCommon {
       stage.actors.stream().map(a -> a.loc).collect(Collectors.toSet())
     );
     // un-comment the following lines and complete them
-    //Stream<Cell> init = stage.grid.getRadius(from, size)
-    //Stream<Cell> clear = 
-    //return clear.collect(Collectors.toList());
-
-    // remove the lines below
-    List<Cell> init = stage.grid.getRadius(from, size);
-    for(Actor a: stage.actors) {
-      init.remove(a.loc);
-    }
-    return init;
+    Stream<Cell> init = stage.grid.getRadius(from, size).stream();
+    Stream<Cell> clear = init.filter(c -> ! actorLocs.contains(c));
+    return clear.collect(Collectors.toList());
   }
 
   public void mouseClicked(int x, int y) {
