@@ -257,3 +257,11 @@ Don't forget to remove the old code once you have it working.
 # 🤔 Task 20a
 
 Idiomatically, writing code in a "functional style" using streams often involves writing a "one liner". That is, creating a pipeline of stream operations without any intermediate local variables being declared inside the method (you can still use lambdas with parameters). See if you can streamline `getClearRadius` even further by removing the intermediate variables `init` and `clear` and re-factor the method into a "one liner" streams pipeline without using any local variables.
+
+# Task 21
+
+Now that you have updated the `getClearRadius` method. See if you can modify the `LeftMostMove` class to utilise `Streams`.
+
+# Task 21a
+
+Now do the same for the `RandomMove` class.

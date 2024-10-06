@@ -1,10 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BotMovingState extends StateCommon {
   public BotMovingState(Stage s) {
